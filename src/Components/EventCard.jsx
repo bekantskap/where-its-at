@@ -1,3 +1,8 @@
-export default function EventCard() {
-  return <div></div>;
+export default function EventCard(props) {
+  console.log(props);
+  return (
+    <article>
+      <p>{props.name}</p>
+    </article>
+  );
 }
