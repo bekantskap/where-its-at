@@ -32,7 +32,15 @@ function App() {
   });
 
   const returnChosenConcert = c => {
-    setChosenConcerts(name => c.name);
+    const newConcert = { ...chosenConcerts };
+    newConcert.name = c.name;
+    newConcert.price = c.price;
+    newConcert.where = c.where;
+    newConcert.when.date = c.when.date;
+    newConcert.when.from = c.when.from;
+    newConcert.when.to = c.when.to;
+    console.log(newConcert);
+    setChosenConcerts(newConcert);
     console.log(chosenConcerts);
   };
 
@@ -46,7 +54,10 @@ function App() {
               path="/events"
               element={<Events returnChosenConcert={returnChosenConcert} />}
             ></Route>
-            <Route path="/chosenevent" element={<ChosenEvent />}></Route>
+            <Route
+              path="/chosenevent"
+              element={<ChosenEvent chosenConcert={chosenConcerts} />}
+            ></Route>
             <Route path="/cart" element={<Cart />}></Route>
             <Route path="/bookedconcerts" element={<BookedConcerts />}></Route>
           </Routes>
