@@ -1,28 +1,33 @@
-import { createContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import EventCard from '../Components/EventCard';
+import { ConcertContext } from '../App';
 
-export const ConcertContext = createContext();
+export default function Events(props) {
+  const [chosenConcerts, setChosenConcerts] = useState({
+    name: '',
+    price: null,
+    where: '',
+    when: {
+      date: '',
+      from: '',
+      to: '',
+    },
+  });
 
-export default function Events() {
-  let [concerts, setConcerts] = useState([]);
-
-  const url = 'https://my-json-server.typicode.com/majazocom/events/events';
-
-  useEffect(() => {
-    fetch(url)
-      .then(response => response.json())
-      .then(data => setConcerts(data));
-  }, []);
+  let concerts = useContext(ConcertContext);
+  // let concert = events.find(c => c.name === props.concert);
 
   return (
-    <ConcertContext.Provider value={concerts}>
-      <section>
-        <h2>Events</h2>
-        <input type="text"></input>
-        {concerts.map((concert, index) => (
-          <EventCard concert={concert.name} key={index} />
-        ))}
-      </section>
-    </ConcertContext.Provider>
+    <section>
+      <h2>Events</h2>
+      <input type="text"></input>
+      {concerts.map((concert, index) => (
+        <EventCard
+          concert={concert}
+          returnChosenConcert={props.returnChosenConcert}
+          key={index}
+        />
+      ))}
+    </section>
   );
 }

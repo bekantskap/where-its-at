@@ -1,9 +1,8 @@
 import { useContext } from 'react';
-import { ConcertContext } from './Events';
+import { ConcertContext } from '../App';
 
-export default function ChosenEvent(state) {
-  let events = useContext(ConcertContext);
-  console.log(state);
+export default function ChosenEvent(concert) {
+  let concerts = useContext(ConcertContext);
   return (
     <article>
       <h1>Event</h1>
