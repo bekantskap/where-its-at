@@ -3,28 +3,18 @@ import EventCard from '../Components/EventCard';
 import { ConcertContext } from '../App';
 
 export default function Events(props) {
-  const [chosenConcerts, setChosenConcerts] = useState({
-    name: '',
-    price: null,
-    where: '',
-    when: {
-      date: '',
-      from: '',
-      to: '',
-    },
-  });
-
-  let concerts = useContext(ConcertContext);
+  let c = useContext(ConcertContext);
+  console.log(c);
   // let concert = events.find(c => c.name === props.concert);
 
   return (
     <section>
       <h2>Events</h2>
       <input type="text"></input>
-      {concerts.map((concert, index) => (
+      {c.concerts.map((concert, index) => (
         <EventCard
           concert={concert}
-          returnChosenConcert={props.returnChosenConcert}
+          // returnChosenConcert={props.returnChosenConcert}
           key={index}
         />
       ))}

@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
 import BookedConcerts from './Pages/BookedConcerts';
@@ -20,45 +20,90 @@ function App() {
       .then(data => setConcerts(data));
   }, []);
 
-  const [chosenConcerts, setChosenConcerts] = useState({
-    name: '',
-    price: null,
-    where: '',
-    when: {
-      date: '',
-      from: '',
-      to: '',
-    },
+  const [numberOfTickets, setNumberOfTickets] = useState({
+    tickets: 1,
+    price: '',
   });
 
-  const returnChosenConcert = c => {
-    const newConcert = { ...chosenConcerts };
-    newConcert.name = c.name;
-    newConcert.price = c.price;
-    newConcert.where = c.where;
-    newConcert.when.date = c.when.date;
-    newConcert.when.from = c.when.from;
-    newConcert.when.to = c.when.to;
-    console.log(newConcert);
-    setChosenConcerts(newConcert);
-    console.log(chosenConcerts);
-  };
+  const [chosenConcerts, setChosenConcerts] = useState([
+    {
+      name: '',
+      price: null,
+      tickets: null,
+      where: '',
+      when: {
+        date: '',
+        from: '',
+        to: '',
+      },
+    },
+  ]);
+
+  const [concertToCart, setConcertToCart] = useState([
+    {
+      // name: '',
+      // price: null,
+      // tickets: null,
+      // where: '',
+      // when: {
+      //   date: '',
+      //   from: '',
+      //   to: '',
+      // },
+    },
+  ]);
+
+  const providerValue = React.useMemo(
+    () => ({
+      concerts,
+      setConcerts,
+      chosenConcerts,
+      setChosenConcerts,
+      numberOfTickets,
+      setNumberOfTickets,
+    }),
+    [concerts, chosenConcerts, numberOfTickets]
+  );
+
+  // const returnChosenConcert = c => {
+  //   const newConcert = { ...chosenConcerts };
+  //   newConcert.name = c.name;
+  //   newConcert.price = c.price;
+  //   newConcert.where = c.where;
+  //   newConcert.when.date = c.when.date;
+  //   newConcert.when.from = c.when.from;
+  //   newConcert.when.to = c.when.to;
+  //   setChosenConcerts(newConcert);
+  // };
+
+  // const returnTicketPrice = t => {
+  //   const newConcert = [...concertToCart];
+  //   newConcert.name = chosenConcerts.name;
+  //   newConcert.price = t.price;
+  //   newConcert.tickets = t.tickets;
+  //   // newConcert.where = chosenConcerts.where;
+  //   // newConcert.when.date = chosenConcerts.when.date;
+  //   // newConcert.from = chosenConcerts.when.from;
+  //   newConcert.to = chosenConcerts.when.to;
+  //   setConcertToCart(concertToCart => [...concertToCart, newConcert]);
+  //   console.log(concertToCart);
+  // };
 
   return (
-    <ConcertContext.Provider value={concerts}>
+    <ConcertContext.Provider value={providerValue}>
       <Router>
         <main>
           <Routes>
             <Route path="/" element={<Start />}></Route>
-            <Route
-              path="/events"
-              element={<Events returnChosenConcert={returnChosenConcert} />}
-            ></Route>
+            <Route path="/events" element={<Events />}></Route>
             <Route
               path="/chosenevent"
               element={<ChosenEvent chosenConcert={chosenConcerts} />}
             ></Route>
-            <Route path="/cart" element={<Cart />}></Route>
+            <Route
+              path="/cart"
+              element={<Cart concertToCart={concertToCart} />}
+            ></Route>
             <Route path="/bookedconcerts" element={<BookedConcerts />}></Route>
           </Routes>
         </main>
