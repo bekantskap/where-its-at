@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react';
 import { ConcertContext } from '../App';
 import { Link } from 'react-router-dom';
+import Button from './Button';
 
 export default function EventCard(props) {
   const x = useContext(ConcertContext);
@@ -8,33 +9,43 @@ export default function EventCard(props) {
   let c = props.concert;
 
   function catchConcert() {
-    console.log(c);
-    const newConcert = [...x.chosenConcerts];
-    newConcert.name = c.name;
-    newConcert.price = c.price;
-    newConcert.where = c.where;
-    newConcert.when.date = c.when.date;
-    newConcert.when.from = c.when.from;
-    newConcert.when.to = c.when.to;
-    // x.setChosenConcerts(x.chosenConcerts, [...x.chosenConcerts, newConcert]);
-    this.x.setChosenConcert({ name: c.name, price: c.price, where: c.where, { ...this.state.when, to: c.to} });
+    x.chosenConcert.name = c.name;
+    x.chosenConcert.price = c.price;
+    x.chosenConcert.where = c.where;
+    x.chosenConcert.when.date = c.when.date;
+    x.chosenConcert.when.from = c.when.from;
+    x.chosenConcert.when.to = c.when.to;
+
+    x.setChosenConcert(x.chosenConcert);
   }
 
   return (
-    <article>
-      <h1>Concerts</h1>
-      <p>{c.when.date}</p>
-      <h2>{c.name}</h2>
-      <p>{c.where}</p>
-      <Link to="/chosenevent" className="btn-price">
-        <input
-          type="button"
-          value={c.price + ' sek'}
-          onClick={() => {
-            catchConcert();
-          }}
-        ></input>
-      </Link>
+    <article className="event-card">
+      <section className="event-card__date">
+        <p>{c.when.date}</p>
+      </section>
+      <section className="event-card__info">
+        <h2>{c.name}</h2>
+        <p>{c.where}</p>
+        <section className="event-card__bottom-info">
+          <section className="event-card__time">
+            <p>{c.when.from}</p>
+            <p>-</p>
+            <p>{c.when.to}</p>
+          </section>
+          <section className="event-card__price">
+            <Link to="/chosenevent" className="btn-price">
+              <input
+                className="event-card__btn"
+                type="button"
+                value={c.price + ' sek'}
+                onClick={catchConcert}
+              ></input>
+            </Link>
+          </section>
+        </section>
+        <div className="event-card__line"></div>
+      </section>
     </article>
   );
 }

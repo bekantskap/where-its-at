@@ -1,53 +1,76 @@
 import { useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { ConcertContext } from '../App';
 import Button from '../Components/Button';
 
-export default function ChosenEvent(props) {
-  let concert = useContext(ConcertContext);
+export default function ChosenEvent() {
+  let x = useContext(ConcertContext);
+  let [numberOfTickets, setNumberOfTickets] = useState(1);
 
-  // console.log(props.chosenConcert.name);
-  let c = props.chosenConcert;
+  function addTicketToCart() {
+    const newCartItem = [...x.concertsToCart];
+    const concert = { ...x.chosenConcert };
+    concert.price = x.chosenConcert.price;
+    concert.tickets = numberOfTickets;
+    newCartItem.push(concert);
+    x.setConcertsToCart(newCartItem);
+  }
 
-  // function decreaseTickets() {
-  //   const newTicket = { ...numberOfTickets };
-  //   if (numberOfTickets.tickets > 1) {
-  //     newTicket.tickets--;
-  //     newTicket.price -= c.price;
-  //     setNumberOfTickets(newTicket);
-  //   }
-  // }
-  // function increaseTickets() {
-  //   const newTicket = { ...numberOfTickets };
-  //   console.log(numberOfTickets.tickets);
-  //   if (numberOfTickets.tickets < 10) {
-  //     newTicket.tickets++;
-  //     newTicket.price += c.price;
-  //     setNumberOfTickets(newTicket);
-  //   }
-  // }
+  function decreaseTickets() {
+    let realPrice = x.chosenConcert.price / numberOfTickets;
+
+    if (numberOfTickets > 1) {
+      numberOfTickets--;
+      x.chosenConcert.price -= realPrice;
+      console.log(numberOfTickets);
+      setNumberOfTickets(numberOfTickets);
+    }
+  }
+
+  function increaseTickets() {
+    let realPrice = x.chosenConcert.price / numberOfTickets;
+    if (numberOfTickets < 10) {
+      numberOfTickets++;
+      x.chosenConcert.price += realPrice;
+      setNumberOfTickets(numberOfTickets);
+      console.log(numberOfTickets);
+    }
+  }
 
   return (
-    <article>
-      <h1>Event</h1>
-      <p>You are about to score some tickets to</p>
-      <h2>{c.name}</h2>
-      <p>{c.when.date}</p>
-      <p>{c.when.from}</p>
-      <p>{c.when.to}</p>
-      <p>{'@' + c.where}</p>
+    <article className="chosen-event container">
+      <section>
+        <h1 className="chosen-event__title">Event</h1>
+        <p>
+          You are about to score
+          <br /> some tickets to
+        </p>
+        <section className="chosen-event__info">
+          <h2 className="chosen-event__artist">{x.chosenConcert.name}</h2>
+          <section className="chosen-event__date">
+            <p className="chosen-event__month">{x.chosenConcert.when.date}</p>
+            <p>{'kl ' + x.chosenConcert.when.from}</p>
+            <p>{'-' + x.chosenConcert.when.to}</p>
+          </section>
+          <p>{'@' + x.chosenConcert.where}</p>
+        </section>
 
-      {/* <p>{numberOfTickets.price}</p>
-      <Button value="-" func={decreaseTickets} />
-      <p>{numberOfTickets.tickets}</p>
-      <Button value="+" func={increaseTickets} /> */}
-
-      <input
-        type="button"
-        value="Lägg i varukorgen"
-        // onClick={() => {
-        //   props.returnTicketPrice(numberOfTickets);
-        // }}
-      ></input>
+        <section className="chosen-event__tickets">
+          <p className="chosen-event__price">
+            {x.chosenConcert.price + ' sek'}
+          </p>
+          <section className="chosen-event__btns">
+            <Button value="-" func={decreaseTickets} />
+            <p>{numberOfTickets}</p>
+            <Button value="+" func={increaseTickets} />
+          </section>
+        </section>
+        <section className="green-btn event-btn">
+          <Link to="/events">
+            <Button value={'Lägg i varukorgen'} func={addTicketToCart} />
+          </Link>
+        </section>
+      </section>
     </article>
   );
 }

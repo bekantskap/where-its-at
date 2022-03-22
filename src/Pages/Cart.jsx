@@ -1,26 +1,54 @@
-import { useEffect } from 'react';
+import { useContext } from 'react';
+import { Link } from 'react-router-dom';
+import { ConcertContext } from '../App';
+import Button from '../Components/Button';
 import CartConcertCard from '../Components/CartConcertCard';
 
-export default function Cart(props) {
-  const c = props.concertToCart;
+export default function Cart() {
+  const x = useContext(ConcertContext);
 
-  function UpdatePrice() {
-    useEffect();
+  function returnConcerts(c) {
+    const total = x.concertsToCart.reduce(
+      (total, curr) => (total = total + curr.price),
+      0
+    );
+    x.totalSum = total;
+    x.setTotalSum(total);
   }
-  return (
-    <section>
-      <h2>Order</h2>
-      {c.map((concert, index) => (
-        <CartConcertCard
-          updatePrice={UpdatePrice}
-          concert={concert}
-          key={index}
-        />
-      ))}
-      <p>Totalt värde på din order</p>
-      <h3></h3>
 
-      <input type="button" value="Skicka din order"></input>
+  // function checkOut() {
+  //   const newCartItem = [...x.concertTickets];
+
+  //   const concert = [...x.concertsToCart];
+  //   newCartItem.push(concert);
+  //   x.setConcertTickets(newCartItem);
+  //   x.concertsToCart.length = 0;
+  //   x.setConcertsToCart(x.concertsToCart);
+  //   console.log(x.concertTickets);
+  //   console.log(x.concertsToCart);
+  // }
+
+  return (
+    <section className="cart container">
+      <section>
+        <h2 className="cart-title">Order</h2>
+        {x.concertsToCart.map((concert, index) => (
+          <CartConcertCard
+            returnConcerts={returnConcerts}
+            concert={concert}
+            key={index}
+          />
+        ))}
+        <section>
+          <p>Totalt värde på din order</p>
+          <h3 className="cart-totalSum">{x.totalSum + ' sek'}</h3>
+        </section>
+        <section className="green-btn cart-btn">
+          <Link to="/bookedconcerts">
+            <Button value={'Skicka order'} />
+          </Link>
+        </section>
+      </section>
     </section>
   );
 }

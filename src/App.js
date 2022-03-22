@@ -20,49 +20,49 @@ function App() {
       .then(data => setConcerts(data));
   }, []);
 
-  const [numberOfTickets, setNumberOfTickets] = useState({
-    tickets: 1,
-    price: '',
+  const [chosenConcert, setChosenConcert] = useState({
+    name: '',
+    price: null,
+    where: '',
+    when: {
+      date: '',
+      from: '',
+      to: '',
+    },
   });
 
-  const [chosenConcerts, setChosenConcerts] = useState([
-    {
-      name: '',
-      price: null,
-      tickets: null,
-      where: '',
-      when: {
-        date: '',
-        from: '',
-        to: '',
-      },
-    },
+  const [concertsToCart, setConcertsToCart] = useState([
+    // {
+    //   name: '',
+    //   price: null,
+    //   tickets: null,
+    //   where: '',
+    //   when: {
+    //     date: '',
+    //     from: '',
+    //     to: '',
+    //   },
+    // },
   ]);
 
-  const [concertToCart, setConcertToCart] = useState([
-    {
-      // name: '',
-      // price: null,
-      // tickets: null,
-      // where: '',
-      // when: {
-      //   date: '',
-      //   from: '',
-      //   to: '',
-      // },
-    },
-  ]);
+  const [totalSum, setTotalSum] = useState();
+
+  const [concertTickets, setConcertTickets] = useState([]);
 
   const providerValue = React.useMemo(
     () => ({
       concerts,
       setConcerts,
-      chosenConcerts,
-      setChosenConcerts,
-      numberOfTickets,
-      setNumberOfTickets,
+      chosenConcert,
+      setChosenConcert,
+      concertsToCart,
+      setConcertsToCart,
+      totalSum,
+      setTotalSum,
+      concertTickets,
+      setConcertTickets,
     }),
-    [concerts, chosenConcerts, numberOfTickets]
+    [concerts, chosenConcert, concertsToCart, totalSum, concertTickets]
   );
 
   // const returnChosenConcert = c => {
@@ -92,18 +92,12 @@ function App() {
   return (
     <ConcertContext.Provider value={providerValue}>
       <Router>
-        <main>
+        <main className="App">
           <Routes>
             <Route path="/" element={<Start />}></Route>
             <Route path="/events" element={<Events />}></Route>
-            <Route
-              path="/chosenevent"
-              element={<ChosenEvent chosenConcert={chosenConcerts} />}
-            ></Route>
-            <Route
-              path="/cart"
-              element={<Cart concertToCart={concertToCart} />}
-            ></Route>
+            <Route path="/chosenevent" element={<ChosenEvent />}></Route>
+            <Route path="/cart" element={<Cart />}></Route>
             <Route path="/bookedconcerts" element={<BookedConcerts />}></Route>
           </Routes>
         </main>

@@ -1,8 +1,20 @@
-import { useContext } from 'react';
-import { ConcertContext } from '../App';
+import Footer from '../Components/Footer';
 
 export default function Start() {
-  const concert = useContext(ConcertContext);
-  // console.log(concert);
-  return <div></div>;
+  return (
+    <article className="start container">
+      <section>
+        <section className="start-page">
+          <img className="start-img" src="../img/logo.png" alt="partaaay"></img>
+          <section className="start-text">
+            <h2>Where It's @</h2>
+            <p>Ticketing made easy</p>
+          </section>
+        </section>
+        <section>
+          <Footer />
+        </section>
+      </section>
+    </article>
+  );
 }
