@@ -49,15 +49,21 @@ export default function ChosenEvent() {
           <h2 className="chosen-event__artist">{x.chosenConcert.name}</h2>
           <section className="chosen-event__date">
             <p className="chosen-event__month">{x.chosenConcert.when.date}</p>
-            <p>{'kl ' + x.chosenConcert.when.from}</p>
-            <p>{'-' + x.chosenConcert.when.to}</p>
+            <p>
+              {x.chosenConcert.when.from
+                ? 'kl ' + x.chosenConcert.when.from
+                : ''}
+            </p>
+            <p>
+              {x.chosenConcert.when.to ? '-' + x.chosenConcert.when.to : ''}
+            </p>
           </section>
-          <p>{'@' + x.chosenConcert.where}</p>
+          <p>{x.chosenConcert.where ? '@' + x.chosenConcert.where : ''}</p>
         </section>
 
         <section className="chosen-event__tickets">
           <p className="chosen-event__price">
-            {x.chosenConcert.price + ' sek'}
+            {x.chosenConcert.price ? x.chosenConcert.price + ' sek' : '0 kr'}
           </p>
           <section className="chosen-event__btns">
             <Button value="-" func={decreaseTickets} />

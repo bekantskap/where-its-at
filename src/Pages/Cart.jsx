@@ -14,7 +14,6 @@ export default function Cart() {
     );
     x.totalSum = total;
     x.setTotalSum(total);
-    console.log(x.concertsToCart);
   }
 
   return (
