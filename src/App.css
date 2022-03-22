@@ -1,38 +1,345 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: 'Sansita', sans-serif;
+  color: #f56b9a;
+}
+
+p,
+input {
+  font-family: 'Fira Sans', sans-serif;
+  color: #ffff;
+}
+
 .App {
+  margin: 0 auto;
+  width: 375px;
+  min-height: 667px;
+  background-color: #231f42;
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+}
+
+.start {
+  height: 667px;
+  display: flex;
+  align-items: center;
+}
+
+.start-img {
+  height: 13em;
+}
+
+.start-text {
+  text-align: center;
+}
+.start-text h2 {
+  font-size: 2em;
+  font-style: italic;
+}
+.event-search {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+.event-header {
+  display: flex;
+  justify-content: center;
+}
+
+.event-card {
+  display: flex;
+  /* justify-content: space-between; */
+  line-height: 1px;
+  height: 4em;
+  width: 19em;
+  margin-top: 25px;
+}
+
+.event-card__date {
+  border: 1px solid white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 700;
+  height: 5em;
+  width: 5em;
+}
+
+.event-card__info {
+  width: 100%;
+  margin-left: 20px;
+}
+.event-card__info h2 {
+  font-size: 22px;
+}
+
+.event-card__info p {
+  font-size: 12px;
+  font-style: italic;
+}
+.event-card__time {
+  display: flex;
+  font-weight: 700;
+}
+
+.event-card__bottom-info {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.event-card__btn {
+  background-color: #231f42;
+  color: #37aeab;
+  font-size: 17px;
+  font-weight: 700;
+  border-style: none;
+  text-align: right;
+}
+.event-card__btn:hover {
+  cursor: pointer;
+}
+
+.event-card__line {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  height: 0px;
+  width: 219px;
+  position: absolute;
+}
+
+.chosen-event {
+  display: flex;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.chosen-event__title {
+  font-size: 36px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.chosen-event__artist {
+  font-size: 38px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.chosen-event__info {
+  line-height: 1px;
+}
+
+.chosen-event__date {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+.chosen-event__month {
+  margin-right: 7px;
+}
+.chosen-event__date p {
+  color: #37aeab;
+  font-weight: 700;
+  font-size: 1.2em;
+}
+
+.chosen-event__tickets {
+  display: flex;
+  justify-content: center;
+  flex-flow: wrap row;
+  width: 15em;
+  height: 7em;
+  margin: 0 auto;
+  margin-top: 80px;
+  border: 2px solid #f56b9a;
+  border-radius: 3px;
+}
+
+.chosen-event__price {
+  flex-basis: 100%;
+  font-size: 32px;
+  box-shadow: 0px 1px 0px 0px #f56b9a;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  padding: 5px;
+  font-weight: 700;
+}
+.chosen-event__btns {
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  line-height: 1px;
+}
+.chosen-event__btns p {
+  margin-left: 50px;
+  margin-right: 50px;
+  font-size: 28px;
+}
+.chosen-event__btns input {
+  font-size: 45px;
+  height: 40px;
+  border-style: none;
+
+  background-color: #231f42;
+}
+
+.green-btn input {
+  width: 100%;
+  font-size: 22px;
+  font-weight: 700;
+  border-radius: 3px;
+
+  padding: 10px;
+  background-color: #37aeab;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.event-btn input {
+  margin-top: 40px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.cart {
+  text-align: center;
+}
+.cart-title {
+  font-size: 36px;
+}
+
+.cart-totalSum {
+  color: white;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.cart-card {
+  border: 2px solid #f56b9a;
+  border-radius: 3px;
+  margin: 5px;
+}
+
+.cart-card__box {
+  line-height: 1em;
+  display: flex;
+  flex-flow: wrap row;
+}
+
+.cart-card__info {
+  width: 19em;
+  height: 3em;
+  padding: 8px;
+  border-bottom: 1px solid #f56b9a;
+}
+
+.cart-card__artist {
+  display: flex;
+  margin: 0;
+  flex-basis: 100%;
+  font-size: 20px;
+}
+.cart-card__dates {
+  display: flex;
+  flex-basis: 100%;
+}
+
+.cart-card__dates p {
+  margin-right: 5px;
+  color: #37aeab;
+}
+.cart-card__ticketBtns {
+  display: flex;
+  justify-content: space-around;
+  height: 50px;
+  flex-basis: 100%;
+}
+
+.cart-card__ticketBtns input {
+  background-color: #231f42;
+  border-style: none;
+  color: white;
+  font-size: 40px;
+  height: 30px;
+}
+
+.booked-concert {
+  background-image: linear-gradient(
+    to bottom,
+    #f56b9a,
+    #d25d98,
+    #ad5292,
+    #884889,
+    #643e7b,
+    #523871,
+    #413266,
+    #312c5b,
+    #2d2955,
+    #2a254e,
+    #262248,
+    #231f42
+  );
+}
+
+.booked-concert p {
+  color: grey;
+}
+
+.booked-concert__container {
+  /* margin: 0 auto; */
+  height: 667px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.booked-concert__card {
+  padding: 15px;
+  border-radius: 3px;
+  background-color: white;
+  width: 75%;
+  height: 75%;
+}
+.booked-concert__artist {
+  border-bottom: 1px dotted grey;
+}
+.booked-concert__artist h2 {
+  margin: 0;
+}
+
+.booked-concert__date {
+  display: flex;
+  justify-content: space-around;
+  line-height: 1px;
+  border-top: 1px dotted grey;
+  border-bottom: 1px dotted grey;
+}
+
+.booked-concert__info {
+  display: flex;
+}
+.booked-concert__info p {
+  margin-right: 10px;
+}
+
+.barcode {
+  display: flex;
+  justify-content: center;
+}
+
+.navbar ul {
+  display: flex;
+  justify-content: space-evenly;
+}
+.navbar ul li {
+  color: white;
+  font-size: 1.5em;
+}
+.navbar ul li:hover {
+  cursor: pointer;
 }
