@@ -12,9 +12,10 @@ export default function Events(props) {
     setSearchInput(searchValue);
     if (searchInput !== '') {
       const filteredData = c.concerts.filter(item => {
-        return Object.values(item).join(
-          ''.toLowerCase().includes(searchInput.toLowerCase())
-        );
+        return Object.values(item)
+          .join('')
+          .toLowerCase()
+          .includes(searchInput.toLowerCase());
       });
       setFilteredResults(filteredData);
     } else {

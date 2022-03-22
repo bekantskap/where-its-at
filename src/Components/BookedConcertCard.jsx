@@ -1,6 +1,5 @@
 export default function BookedConcertCard(props) {
   const c = props.concert;
-  console.log(props.concert.length);
   function rng() {
     return Math.floor(Math.random() * 4000);
   }
