@@ -7,26 +7,15 @@ import CartConcertCard from '../Components/CartConcertCard';
 export default function Cart() {
   const x = useContext(ConcertContext);
 
-  function returnConcerts(c) {
+  function returnConcerts() {
     const total = x.concertsToCart.reduce(
       (total, curr) => (total = total + curr.price),
       0
     );
     x.totalSum = total;
     x.setTotalSum(total);
+    console.log(x.concertsToCart);
   }
-
-  // function checkOut() {
-  //   const newCartItem = [...x.concertTickets];
-
-  //   const concert = [...x.concertsToCart];
-  //   newCartItem.push(concert);
-  //   x.setConcertTickets(newCartItem);
-  //   x.concertsToCart.length = 0;
-  //   x.setConcertsToCart(x.concertsToCart);
-  //   console.log(x.concertTickets);
-  //   console.log(x.concertsToCart);
-  // }
 
   return (
     <section className="cart container">
@@ -41,11 +30,15 @@ export default function Cart() {
         ))}
         <section>
           <p>Totalt värde på din order</p>
-          <h3 className="cart-totalSum">{x.totalSum + ' sek'}</h3>
+          <h3 className="cart-totalSum">
+            {x.totalSum ? x.totalSum + ' sek' : 'Här var det tomt'}
+          </h3>
         </section>
         <section className="green-btn cart-btn">
           <Link to="/bookedconcerts">
-            <Button value={'Skicka order'} />
+            <Button
+              value={x.totalSum ? 'Skicka order' : 'Inget i kundkorgen'}
+            />
           </Link>
         </section>
       </section>

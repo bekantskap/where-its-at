@@ -31,23 +31,9 @@ function App() {
     },
   });
 
-  const [concertsToCart, setConcertsToCart] = useState([
-    // {
-    //   name: '',
-    //   price: null,
-    //   tickets: null,
-    //   where: '',
-    //   when: {
-    //     date: '',
-    //     from: '',
-    //     to: '',
-    //   },
-    // },
-  ]);
+  const [concertsToCart, setConcertsToCart] = useState([]);
 
   const [totalSum, setTotalSum] = useState();
-
-  const [concertTickets, setConcertTickets] = useState([]);
 
   const providerValue = React.useMemo(
     () => ({
@@ -59,35 +45,9 @@ function App() {
       setConcertsToCart,
       totalSum,
       setTotalSum,
-      concertTickets,
-      setConcertTickets,
     }),
-    [concerts, chosenConcert, concertsToCart, totalSum, concertTickets]
+    [concerts, chosenConcert, concertsToCart, totalSum]
   );
-
-  // const returnChosenConcert = c => {
-  //   const newConcert = { ...chosenConcerts };
-  //   newConcert.name = c.name;
-  //   newConcert.price = c.price;
-  //   newConcert.where = c.where;
-  //   newConcert.when.date = c.when.date;
-  //   newConcert.when.from = c.when.from;
-  //   newConcert.when.to = c.when.to;
-  //   setChosenConcerts(newConcert);
-  // };
-
-  // const returnTicketPrice = t => {
-  //   const newConcert = [...concertToCart];
-  //   newConcert.name = chosenConcerts.name;
-  //   newConcert.price = t.price;
-  //   newConcert.tickets = t.tickets;
-  //   // newConcert.where = chosenConcerts.where;
-  //   // newConcert.when.date = chosenConcerts.when.date;
-  //   // newConcert.from = chosenConcerts.when.from;
-  //   newConcert.to = chosenConcerts.when.to;
-  //   setConcertToCart(concertToCart => [...concertToCart, newConcert]);
-  //   console.log(concertToCart);
-  // };
 
   return (
     <ConcertContext.Provider value={providerValue}>
@@ -101,22 +61,6 @@ function App() {
             <Route path="/bookedconcerts" element={<BookedConcerts />}></Route>
           </Routes>
         </main>
-
-        <footer>
-          <nav>
-            <ul>
-              <li>
-                <Link to="/events">Events</Link>
-              </li>
-              <li>
-                <Link to="/cart">Cart</Link>
-              </li>
-              <li>
-                <Link to="/bookedconcerts">Booked Concerts</Link>
-              </li>
-            </ul>
-          </nav>
-        </footer>
       </Router>
     </ConcertContext.Provider>
   );
